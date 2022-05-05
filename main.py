@@ -12,7 +12,7 @@ for i in range(n):
     #문자가 하나만 들어올 시
     if len(a)==1:
         if a[0] == 'all':
-            li = set([i for i in range(21)])
+            li = set([i for i in range(1,21)])
         else:
             li = set()
     #문자가 2개 들어올 시
