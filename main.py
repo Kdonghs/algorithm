@@ -1,24 +1,51 @@
-import sys
+from collections import defaultdict
 
-n,m = map(int,sys.stdin.readline().strip().split())
-know = set(sys.stdin.readline().strip().rsplit()[1:])
-li=[]
+# id_list = ["muzi", "frodo", "apeach", "neo"]
+# report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
+# k=2
+li = defaultdict(list)
+stop = []
+result = [0 for i in range(len(id_list))]
 
-if len(know)==0:
-    print(m)
-else:
-    for i in range(m):
-        party = set(sys.stdin.readline().strip().split()[1:])
-        li.append(party)
+for i in report:
+    a,b = i.split()
+    if a in li[b]:
+        continue
+    li[b].append(a)
+print(li)
 
-    for _ in range(m):
-        for i in li:
-            if know & i:
-                know = know.union(i)
+for i in li:
+    if len(li[i])>=k:
+        stop.append(i)
 
-    count=0
+print(stop)
+
+for i in li:
+    if i in stop:
+        for j in li[i]:
+            print(id_list.index(j))
+            result[id_list.index(j)]+=1
+print(result)
+
+def a():
+    li = defaultdict(list)
+    stop = []
+    result = [0 for i in range(len(id_list))]
+
+    for i in report:
+        a, b = i.split()
+        if a in li[b]:
+            continue
+        li[b].append(a)
+
     for i in li:
-        if not know & i:
-            count+=1
+        if len(li[i]) >= k:
+            stop.append(i)
 
-    print(count)
+
+    for i in li:
+        if i in stop:
+            for j in li[i]:
+                print(id_list.index(j))
+                result[id_list.index(j)] += 1
+    print(result)
