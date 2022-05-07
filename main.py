@@ -1,51 +1,38 @@
-from collections import defaultdict
 
-# id_list = ["muzi", "frodo", "apeach", "neo"]
-# report = ["muzi frodo","apeach frodo","frodo neo","muzi neo","apeach muzi"]
-# k=2
-li = defaultdict(list)
-stop = []
-result = [0 for i in range(len(id_list))]
-
-for i in report:
-    a,b = i.split()
-    if a in li[b]:
+record = ["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]
+li = {}
+result =[]
+answer = []
+for i in record:
+    io = i.split()
+    if io[0]=='Enter':
+        li[io[1]]=io[2]
+    elif io[0]=='Change':
+        li[io[1]] = io[2]
         continue
-    li[b].append(a)
-print(li)
+    result.append([io[1],io[0]])
 
-for i in li:
-    if len(li[i])>=k:
-        stop.append(i)
-
-print(stop)
-
-for i in li:
-    if i in stop:
-        for j in li[i]:
-            print(id_list.index(j))
-            result[id_list.index(j)]+=1
-print(result)
+for i in result:
+    if i[1] =='Enter':
+        answer.append(li[i[0]] + "님이 들어왔습니다.")
+    else:
+        answer.append(li[i[0]] + "님이 나갔습니다.")
 
 def a():
-    li = defaultdict(list)
-    stop = []
-    result = [0 for i in range(len(id_list))]
-
-    for i in report:
-        a, b = i.split()
-        if a in li[b]:
+    li = {}
+    result = []
+    answer = []
+    for i in record:
+        io = i.split()
+        if io[0] == 'Enter':
+            li[io[1]] = io[2]
+        elif io[0] == 'Change':
+            li[io[1]] = io[2]
             continue
-        li[b].append(a)
+        result.append([io[1], io[0]])
 
-    for i in li:
-        if len(li[i]) >= k:
-            stop.append(i)
-
-
-    for i in li:
-        if i in stop:
-            for j in li[i]:
-                print(id_list.index(j))
-                result[id_list.index(j)] += 1
-    print(result)
+    for i in result:
+        if i[1] == 'Enter':
+            answer.append(li[i[0]] + "님이 들어왔습니다.")
+        else:
+            answer.append(li[i[0]] + "님이 나갔습니다.")
