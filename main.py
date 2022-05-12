@@ -1,24 +1,27 @@
-import sys
+N=2
+number = 110
 
-n,m = map(int,sys.stdin.readline().strip().split())
-know = set(sys.stdin.readline().strip().rsplit()[1:])
-li=[]
+def solution(N, number):
+    s = [set() for i in range(8)]
 
-if len(know)==0:
-    print(m)
-else:
-    for i in range(m):
-        party = set(sys.stdin.readline().strip().split()[1:])
-        li.append(party)
+    for i, x in enumerate(s, start=1):
+        x.add(int(str(N) * i))
 
-    for _ in range(m):
-        for i in li:
-            if know & i:
-                know = know.union(i)
+    for i in range(1, 8):
+        for j in range(i):
+            for op1 in s[j]:
+                for op2 in s[i - j - 1]:
+                    s[i].add(op1 + op2)
+                    s[i].add(op1 - op2)
+                    s[i].add(op1 * op2)
+                    if op2 != 0:
+                        s[i].add(op1 // op2)
 
-    count=0
-    for i in li:
-        if not know & i:
-            count+=1
+        if number in s[i]:
+            answer = i + 1
+            break
 
-    print(count)
+    else:
+        answer = -1
+    return answer
+print(solution(N,number))
