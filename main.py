@@ -1,6 +1,21 @@
-numbers = [1,2,3,4,6,7,8,0]
-li = [i for i in range(10)]
+number = [1,1,1,1,1]
+target = 3
 
-for i in numbers:
-    li.remove(i)
-print(sum(li))
+def dfs(numbers,target,depth):
+    answer = 0
+    if depth == len(numbers):
+        if sum(numbers) == target:
+            return 1
+        else:
+            return 0
+    else:
+        answer += dfs(numbers,target,depth+1)
+        numbers[depth] *= -1
+        answer += dfs(numbers,target,depth+1)
+    return answer
+
+def a(numbers, target):
+    answer = 0
+    return dfs(numbers,target,0)
+
+print(a(number,target))
